@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 1.6;
+}
+
+.user {
+    background-color: rgb(255, 255, 255);
+    outline: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    transition: .5s ease;
+}
+
+.user a {
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 10px;
+}
+
+.user:hover a {
+    background-color: black;
+    color: rgb(255, 255, 255);
+}
+
+.user:hover {
+    box-shadow: 3px 13px 10px rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    user-select: none;
+    border: 1px solid black;
+}
+
+/* ---------- NAVBAR ---------- */
+.nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    color: black;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: clamp(18px, 2vw, 23px);
+}
+.logo a{
+    color: black;text-decoration: none;
+}
+
+.nav-list ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-list a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-list:hover a {
+    color: white;
+}
+
+.login-btn {
+    cursor: pointer;
+    font-weight: 500;
+    outline: none;
+    border: 1px solid rgb(82, 82, 82);
+    padding: 0.5rem 1rem;
+    color: black;
+    border-radius: 15px;
+    font-size: clamp(15px, 1.5vw, 15px);
+    transition: 0.5s ease;
+}
+
+.login-btn:hover {
+    background-color: #000000;
+    color: white;
+}
+
+.welcome p {
+    color: black;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}

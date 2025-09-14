@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 1.6;
+}
+
+/* ---------- NAVBAR ---------- */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: rgb(255, 255, 255);
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: clamp(18px, 2vw, 23px);
+}
+
+.logo a {
+    color: black;
+    text-decoration: none;
+}
+
+.user {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    outline: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    transition: .5s ease;
+}
+
+.user a {
+    color: black;
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 10px;
+}
+
+.user:hover a {
+    background-color: black;
+    color: rgb(255, 255, 255);
+}
+
+.user:hover {
+    box-shadow: 3px 13px 10px rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    user-select: none;
+    border: 1px solid black;
+}
+
+.nav-list>ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    list-style: none;
+    margin: 0.5rem 0 0 0;
+}
+
+.nav-list ul li {
+    font-size: clamp(12px, 1.5vw, 15px);
+}
+
+.combine {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.dashboard li {
+    list-style: none;
+    border: 1px solid black;
+}
+
+.dashboard li a {
+    text-decoration: none;
+    color: black;
+}
+
+.dashboard:hover a {
+    color: white;
+}
+
+.login-btn {
+    cursor: pointer;
+    font-weight: 500;
+    outline: none;
+    border: 1px solid rgb(82, 82, 82);
+    padding: 0.5rem 1rem;
+    color: black;
+    border-radius: 15px;
+    font-size: clamp(15px, 1.5vw, 15px);
+    transition: 0.5s ease;
+}
+
+.login-btn:hover {
+    background-color: #000000;
+    color: white;
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+main {
+    width: 100%;
+    display: flex;
+}
+
+.preview {
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    color: black;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.head {
+    text-align: center;
+    color: black;
+    margin-top: 15px;
+    font-size: clamp(15px, 2vw, 10px);
+}
+
+/* ---------- UPLOAD SECTION ---------- */
+.upload-container {
+    padding: 1rem;
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    border: 2px dashed #000000;
+    border-radius: 10px;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: clamp(13px, 1.5vw, 15px);
+}
+
+.file-input {
+    display: none;
+}
+
+.browse {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.file-name {
+    font-size: clamp(12px, 1.2vw, 14px);
+}
+
+/* loader */
+.loader-wrapper {
+    position: fixed;
+    /* Fullscreen overlay */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    /* optional white overlay */
+    z-index: 9999;
+}
+
+.loader {
+    --base-color: #000000;
+    position: relative;
+    /* 👈 now pseudo elements will align correctly */
+    width: 60px;
+    height: 60px;
+}
+
+.loader::before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f5f85937;
+    background-image: radial-gradient(circle 8px at 18px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 0px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 0px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 36px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 36px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 30px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 30px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 5px, var(--base-color) 100%, transparent 0);
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    animation: rotationBack 3s linear infinite;
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* ---------- BUTTONS ---------- */
+#start-analysis {
+    display: block;
+    margin-left: 18px;
+    margin: 0px auto;
+    margin-top: 20px;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    font-size: clamp(13px, 1.5vw, 15px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: .4s ease;
+}
+
+#start-analysis:hover {
+    color: white;
+    background-color: rgb(0, 0, 0);
+}
+
+/* ---------- MAIN RESULT SECTION ---------- */
+#main {
+    display: none;
+    overflow: scroll;
+    height: 100vh;
+}
+
+.atsmeter {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    background: conic-gradient(#ddd 0deg 360deg);
+    /* default empty */
+    position: relative;
+    transition: 0.5s ease;
+}
+
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.circle span {
+    position: relative;
+    z-index: 1;
+}
+
+/* (Your .container text styles were accidentally nested inside .circle span) */
+.container p,
+.container h2,
+.container h3,
+.container h4 {
+    margin: 0.5rem 0 1rem;
+    font-size: clamp(13px, 1.6vw, 16px);
+}
+
+
+/* Common box style */
+.username,
+.atsscore,
+.projects,
+.contactinfo,
+.education,
+#experience {
+    margin-top: 0.3rem;
+    padding: 0.8rem;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.contactinfo a {
+    text-decoration: underline;
+}
+
+#SkillsExtracted {
+    display: flex;
+    border: 1px solid black;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    font-size: clamp(12px, 1.5vw, 15px);
+    border-radius: 10px;
+}
+
+/* preview */
+.preview {
+    flex: 1;
+    background-color: #fff;
+    display: none;
+    border-left: 2px solid #ccc;
+}
+
+.preview iframe {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    border: none;
+}
+
+
+/* ---------- RECOMMENDATIONS ---------- */
+
+
+.recommendation {
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.suggestions-btn {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 20px;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: clamp(12px, 1.5vw, 15px);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.suggestions-btn:hover {
+    box-shadow: 0px 10px 10px rgb(0, 0, 0);
+}
+
+.suggestion {
+    margin: 0.5rem;
+    padding: 1rem;
+    line-height: 1.4;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: clamp(13px, 1.5vw, 15px);
+    transition: .3s ease;
+}
+
+.suggestion:hover {
+    transform: translateX(-5px);
+}
+
+/* Format + keyword boxes */
+.formattoimprove,
+.keywordstosuggest {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-top: 1px solid black;
+}
+
+.keywordstosuggest {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.keyword-btn {
+    border: 1px solid black;
+    margin: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: black;
+    width: fit-content;
+    font-size: clamp(12px, 1.5vw, 14px);
+}
+
+/* ---------- SKILL BADGES ---------- */
+.skill-badge {
+    display: flex;
+    width: fit-content;
+    margin: 0.5rem;
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+    font-size: clamp(12px, 1.5vw, 14px);
+    border-radius: 20px;
+}
+
+.test-btn {
+    display: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: white;
+    transition: .5s ease;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.test-btn a {
+    color: black;
+    text-decoration: none;
+}
+
+.test-btn:hover {
+    background-color: black;
+}
+
+.test-btn:hover a {
+    color: white;
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+@media screen and (max-width: 768px) {
+    .nav {
+        padding: 10px;
+        align-items: center;
+    }
+
+    .nav-list>ul {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .upload-container {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width:430px) {
+    .head h1 {
+        font-size: 18px;
+    }
+
+    .upload-container {
+        margin-left: 12.5%;
+        width: 75%;
+    }
+}

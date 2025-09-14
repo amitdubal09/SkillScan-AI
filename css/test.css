@@ -1,0 +1,374 @@
+/* ===========
+   Black & White Theme for Test Page
+   File: css/test.css
+   =========== */
+
+/* Reset & Base */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #6b6b6b;
+  --border: #e5e5e5;
+  --accent: #000000;
+  /* stays black */
+  --accent-ghost: rgba(0, 0, 0, 0.06);
+  --focus: 2px dashed #000;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.55;
+}
+
+.main {
+  border: 1px solid rgba(0, 0, 0, 0.838);
+  width: 50%;
+  margin: 1px auto;
+  border-radius: 16px;
+  margin-top: 50px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  transition: .5s ease;
+}
+
+.user a {
+  color: black;
+  margin-left: 10px;
+  text-decoration: none;
+  padding: 5px;
+  border: 1px solid black;
+  outline: none;
+  border-radius: 10px;
+}
+
+.user:hover a {
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+
+.user:hover {
+  box-shadow: 3px 13px 10px rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  user-select: none;
+  border: 1px solid black;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  color: black;
+  flex-wrap: wrap;
+  border-bottom: 1px solid black;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: clamp(18px, 2vw, 23px);
+}
+
+.logo a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-list ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-list a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-list:hover a {
+  color: white;
+}
+
+.login-btn {
+  cursor: pointer;
+  font-weight: 500;
+  outline: none;
+  border: 1px solid rgb(82, 82, 82);
+  padding: 0.5rem 1rem;
+  color: black;
+  border-radius: 15px;
+  font-size: clamp(15px, 1.5vw, 15px);
+  transition: 0.5s ease;
+}
+
+.login-btn:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.combine {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.dashboard li {
+  list-style: none;
+}
+
+.dashboard li a {
+  text-decoration: none;
+  color: black;
+}
+
+.dashboard:hover a {
+  color: white;
+}
+
+/* Container */
+.container {
+  display: none;
+  max-width: 860px;
+  margin: 48px auto;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.838);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* Heading */
+.container>h2 {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Quiz items */
+.quiz-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.quiz-item:last-child {
+  border-bottom: none;
+}
+
+.question {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Options list */
+.options {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+/* Option row */
+.options li {
+  display: flex;
+  align-items: center;
+}
+
+label {
+  display: block;
+  padding: 6px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+label.correct {
+  border: 1px solid green;
+  border-color: green;
+  background: rgba(0, 255, 0, 0.494);
+}
+
+label.wrong {
+  border-color: red;
+  background: rgba(255, 0, 0, 0.494);
+}
+
+/* Custom radio + label block */
+.options label {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.838);
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.05s ease, box-shadow 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.options label:hover {
+  background: var(--accent-ghost);
+  border-color: #cfcfcf;
+}
+
+.options input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 2px solid var(--fg);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+
+.options input[type="radio"]:checked {
+  border-color: var(--accent);
+}
+
+.options input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.options input[type="radio"]:focus-visible {
+  outline: var(--focus);
+  outline-offset: 3px;
+}
+
+/* Submit button */
+#submit {
+  margin-top: 22px;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: #fff;
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform 0.05s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+#submit:hover {
+  background: #000;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+#submit:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+#submit:focus-visible {
+  outline: var(--focus);
+  outline-offset: 4px;
+}
+
+/* Result */
+.result {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px dashed var(--fg);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--fg);
+  font-weight: 600;
+}
+
+/* Helpers */
+p,
+.result,
+.question {
+  word-wrap: break-word;
+}
+
+.back a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.back {
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-weight: bold;
+  transition: .5s ease;
+}
+
+.back:hover a {
+  color: white;
+}
+
+.back:hover {
+  background-color: rgb(0, 0, 0);
+}
+
+.footer {
+  background: #ffffff;
+  width: 100%;
+  padding: 20px;
+  display: none;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #201f1f;
+  border-top: 1px solid black;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px 12px;
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .options label {
+    padding: 12px;
+  }
+}
+
+#waitmseg span {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
