@@ -12,7 +12,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
         $experience = $_POST['experience'];
         $ats = $_POST['atsscore'];
 
-        $sql = "INSERT INTO extracted_information ( name, contactinfo, skills, projects, education, experirnce, atsscore) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO extracted_information ( name, contactinfo, skills, projects, education, experience, atsscore) VALUES (?, ?, ?,)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $name, $contactinfo, $skills, $projects, $education, $experience, $ats);

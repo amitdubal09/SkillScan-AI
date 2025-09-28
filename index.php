@@ -44,22 +44,23 @@ session_start();
     </header>
 
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="intro">
             <h1>Welcome to SkillScan</h1>
             <p>Your personal resume analyzer that extracts key details, evaluates ATS score, and gives you smart
                 recommendations to improve your resume.</p>
-            <a href="auth.php" class="btn">Analyze Resume</a>
-            <a href="auth.php" class="btn">Take Test</a>
 
-        </div>
-        <div class="gif">
-            <video autoplay loop muted class="video-gif">
-                <source src="img/howitworks.mp4" type="video/mp4">
-            </video>
+            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                <!-- If logged in -->
+                <a href="resumeanalysis.php" class="btn">Analyse Resume</a>
+                <a href="test.php?feature=test" class="btn">Take Test</a>
+            <?php else: ?>
+                <!-- If not logged in -->
+                <a href="auth.php" class="btn">Get Start</a>
+            <?php endif; ?>
         </div>
     </section>
+
 
     <!-- Features Section -->
     <section class="features">
@@ -112,9 +113,12 @@ session_start();
     </section>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <p>© 2025 SkillScan | Built to help you land your dream job</p>
+        <p><a href="privacy&policy.html">Privacy Policy</a></p>
     </footer>
+
 
     <!-- JS Scripts -->
     <script src="./javascript/index.js" defer></script>

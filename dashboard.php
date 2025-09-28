@@ -1,98 +1,129 @@
 <?php
 require('connection.php');
 session_start();
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 
-    $username = $_SESSION['username'];
-    $query = "select * from `extracted_information` where `username` ='$username'";
-    $result = mysqli_query($conn, $query);
-    if ($result) {
-        if (mysqli_num_rows($result) > 0) {
-            $data = mysqli_fetch_assoc($result);
-            $skills = $data['skills'];
-            $experience = $data['experience'];
-            $education = $data['education'];
-            $projects = $data['project'];
-            $ats = $data['ats'];
-            $contactinfo = $data['contactinfo'];
-        }
-    }
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    $_SESSION['redirect_to'] = $_SERVER['REQUEST_URI'];
+    header("location: ./auth.php");
+    exit;
+}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SkillScan Dashboard</title>
-        <link rel="stylesheet" href="css/dashboard.css">
-    </head>
+$username = $_SESSION['username'];
+$query = "SELECT * FROM `extracted_information` WHERE `username` = '$username'";
+$result = mysqli_query($conn, $query);
 
-    <body>
-        <header>
-            <div class="nav">
-                <div class="logo"><b><a href="index.php">SkillScan</a></b></div>
-                <?php
-                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-                    echo "
-                        <div class='user'>
-                            <span>Hiii</span>
-                            $_SESSION[username] <a href='logout.php'>logout</a>
-                        </div>
-                    ";
+$skills = $experience = $education = $projects = $ats = $contactinfo = '';
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_assoc($result);
+    $skills = $data['skills'];
+    $experience = $data['experience'];
+    $education = $data['education'];
+    $projects = $data['project'];
+    $ats = $data['ats'];
+    $contactinfo = $data['contactinfo'];
+}
+
+// Helper function to safely decode JSON and print as bullet list
+function printJsonAsList($json)
+{
+    $arr = json_decode($json, true);
+    if (is_array($arr)) {
+        $output = '<ul>';
+        foreach ($arr as $key => $val) {
+            if (is_array($val)) {
+                $output .= '<li>' . implode(", ", $val) . '</li>';
+            } else {
+                if (is_numeric($key)) {
+                    $output .= "<li>$val</li>";
                 } else {
-                    echo "
-                      <div class='nav-list'>
-                            <ul>
-                                <li class='login-btn'><a href='auth.php'>SignUp</a></li>
-                            </ul>
-                      </div>
-                     ";
+                    $output .= "<li><strong>$key:</strong> $val</li>";
                 }
-                ?>
-            </div>
+            }
+        }
+        $output .= '</ul>';
+        return $output;
+    }
+    return '<p>' . nl2br(htmlspecialchars($json)) . '</p>';
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillScan Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.php">SkillScan</a>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.php" class="active">🏠 Dashboard</a></li>
+            <li><a href="resumeanalysis.php">📄 Resume Analysis</a></li>
+            <li><a href="test.php">📝 Take Test</a></li>
+            <li><a href="report.php">📊 Reports</a></li>
+        </ul>
+        <div class="logout">
+            <a href="logout.php">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?> 🎉</h2>
         </header>
-        <strong class="welcome">
-            <p>Welcome <?php echo "$_SESSION[username]"; ?></p>
-        </strong>
-        <div class="container">
-            <div class="section1">
-                <div class="content">
-                    <div class="user-info">
-                        <strong></strong>
-                    </div>
-                    <div class="skills">
-                        <p><strong>Skills:</strong><?php echo $skills ?></p>
-                    </div>
-                    <div class="experience">
-                        <p><strong>experience:</strong><?php echo $experience ?></p>
-                    </div>
-                    <div class="education">
-                        <p><strong>education:</strong><?php echo $education ?></p>
-                    </div>
-                    <div class="projects">
-                        <p><strong>projects:</strong><?php echo $projects ?></p>
-                    </div>
-                    <div class="ats">
-                        <p><strong>ats:</strong><?php echo $ats ?></p>
-                    </div>
-                </div>
-                <p class="btn"><a href="resumeanalysis.php">Analyze Resume</a></p>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Skills</h3>
+                <p>
+                    <?php
+                    $skillsArr = json_decode($skills, true);
+                    if (is_array($skillsArr)) {
+                        foreach ($skillsArr as $skill) {
+                            echo '<span class="skill-badge">' . htmlspecialchars($skill) . '</span> ';
+                        }
+                    } else {
+                        echo htmlspecialchars($skills);
+                    }
+                    ?>
+                </p>
             </div>
-            <div class="section2">
-                <p class="btn"><a href="test.php">Take Test</a></p>
+
+            <div class="card">
+                <h3>Experience</h3>
+                <?php echo printJsonAsList($experience); ?>
+            </div>
+
+            <div class="card">
+                <h3>Education</h3>
+                <?php echo printJsonAsList($education); ?>
+            </div>
+
+            <div class="card">
+                <h3>Projects</h3>
+                <?php echo printJsonAsList($projects); ?>
+            </div>
+
+            <div class="card">
+                <h3>Contact Info</h3>
+                <p><?php echo printJsonAsList($contactinfo); ?></p>
+            </div>
+
+            <div class="card highlight">
+                <h3>ATS Score</h3>
+                <p><?php echo htmlspecialchars($ats); ?>%</p>
             </div>
         </div>
+    </main>
+</body>
 
-        <script src="javascript/dashboard.js"></script>
-        <script src="javascript/script.js"></script>
-    </body>
-
-    </html>
-    <?php
-
-} else {
-    $_SESSION['redirect_to'] = $_SERVER['REQUEST_URI'];
-    header("location:./auth.php");
-    exit;
-} ?>
+</html>

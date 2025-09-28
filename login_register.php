@@ -54,7 +54,7 @@ if (isset($_POST['register'])) {
                 // ";
                 $_SESSION['logged_in'] = true;
                 $_SESSION['username'] = $_POST['username'];
-                $redirect = $_SESSION['redirect_to'] ?? 'dashboard.php';
+                $redirect = $_SESSION['redirect_to'] ?? 'index.php';
                 unset($_SESSION['redirect_to']);
                 header("location: $redirect");
             } else {
@@ -100,7 +100,7 @@ if (isset($_POST['login'])) {
             if (password_verify($password, $result_fetch['password'])) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['username'] = $result_fetch['username'];
-                $redirect = $_SESSION['redirect_to'] ?? 'dashboard.php';
+                $redirect = $_SESSION['redirect_to'] ?? 'index.php';
                 unset($_SESSION['redirect_to']); // clear redirect once used
                 header("location: $redirect");
             } else {

@@ -9,16 +9,25 @@
 
 body {
     min-height: 100vh;
-    color: black;
-    background-color: #f6f6f6;
+    background: radial-gradient(circle at top left, #0a0a0a, #000);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-body>a>img {
+#back-img {
     position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+}
+
+#back-img img {
     width: 30px;
-    margin: 10px;
-    margin-top: 15px;
+    height: auto;
     cursor: pointer;
+    filter: drop-shadow(0 0 8px #0ff);
 }
 
 .body {
@@ -27,108 +36,86 @@ body>a>img {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Dark black background */
     padding: 15px;
 }
 
 .inline {
-    height: auto;
     width: 60%;
     display: flex;
-    background-color: white;
     align-items: center;
     justify-content: center;
-    box-shadow: 20px 30px 25px black;
-}
-
-.bg-gif {
-    width: 450px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 15px;
 }
 
 .wrapper {
-    position: relative;
     width: 100%;
     max-width: 470px;
     border-radius: 12px;
-    padding: 20px 30px 100px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0);
-    overflow: hidden;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
     transition: .5s ease;
 }
 
-/* Signup Form */
-.form.signup header {
+/* Forms */
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form header {
     font-size: 26px;
     text-align: center;
     font-weight: 600;
     cursor: pointer;
-}
-
-/* Login Form */
-.form.login {
-    position: absolute;
-    left: 50%;
-    bottom: -86%;
-    transform: translateX(-50%);
-    width: calc(100% + 220px);
-    padding: 20px 140px;
-    border-radius: 50%;
-    height: 100%;
-    background: #ffffff;
-    border: 1px solid black;
-    transition: all 0.6s ease;
-}
-
-.wrapper.active .form.login {
-    bottom: -14%;
-    border-radius: 35%;
-}
-
-.form.login header {
-    font-size: 26px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    opacity: 0.7;
-}
-
-.wrapper.active .form.login header {
-    opacity: 1;
-}
-
-.wrapper.active .signup header {
-    opacity: 0.6;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
 }
 
 .wrapper form {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    margin-top: 35px;
+    margin-top: 25px;
 }
 
 form input {
     height: 50px;
     outline: none;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 0 15px;
     font-size: 15px;
     font-weight: 400;
     border-radius: 8px;
-    background: #2a2a2a00;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    transition: 0.3s;
 }
 
-.moving-input {
-    transition: .5s ease;
-}
-
-.moving-input:hover {
-    transform: translateX(-5px);
-}
-
-.form.login input:focus {
-    box-shadow: 0 0 5px #666;
+form input:focus {
+    border-color: #0ff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
 
 form .checkbox {
@@ -140,7 +127,7 @@ form .checkbox {
 .checkbox input[type="checkbox"] {
     height: 16px;
     width: 16px;
-    accent-color: #fff;
+    accent-color: #0ff;
     cursor: pointer;
 }
 
@@ -150,9 +137,10 @@ form .checkbox label {
 }
 
 form a {
-    color: #000000;
+    color: #0ff;
     text-decoration: none;
     font-size: 14px;
+    text-shadow: 0 0 6px #0ff;
 }
 
 form a:hover {
@@ -164,93 +152,37 @@ form a:hover {
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    background: #ffffff;
-    border: 1px solid black;
+    border: 1px solid rgb(78 78 78);
     transition: 0.3s ease;
     padding: 12px;
+    color: #ff3c7d;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    background: transparent;
 }
 
 .submit:hover {
-    background: #1d1d1d;
-    color: white;
     font-weight: bold;
+    box-shadow: 0 0 20px #ff3c7d;
 }
 
-@media screen and (max-width:1450px) {
-    .bg-gif {
-        display: block;
-    }
-    .inline{
-        width: 80%;
-    }
+/* Toggle links */
+.toggle-link {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: #0ff;
+    text-shadow: 0 0 6px #0ff;
 }
 
-@media screen and (max-width:1024px) {
-    .inline {
-        width: 95%;
-    }
-    .bg-gif{
-        display: block;
-    }
+.toggle-link:hover {
+    text-decoration: underline;
 }
 
+/* Responsive */
 @media screen and (max-width:768px) {
     .inline {
-        width: 60%;
-    }
-    .bg-gif{
-        display: none;
-    }
-}
-
-@media screen and (max-width:430px) {
-    .inline {
-        width: 70%;
-    }
-
-    .body {
-        padding: 1px;
-    }
-    .wrapper form{
-        gap: 13px;
-        margin-top: 25px;
-    }
-
-    form input,
-    .submit {
-        height: 30px;align-items: center;
-    }
-    form input::placeholder{
-        font-size: 10px;
-    }
-
-    form .checkbox label {
-        font-size: 10px;
-        white-space: nowrap;
-    }
-    body>a>img{
-        width: 20px;margin-top: 10px;
-    }
-
-    .form.login {
-        padding: 5px 120px;
-    }
-    form a{
-        font-size: 10px;
-    }
-
-    .form.signup header {
-        font-size: 21px;
-    }
-    .form.login header{
-        font-size: 21px;
-    }
-
-    .submit {
-        padding: 0;
-    }
-
-    .wrapper {
-        padding: 10px 15px 60px;
+        width: 90%;
     }
 }

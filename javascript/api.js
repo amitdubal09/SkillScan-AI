@@ -51,14 +51,14 @@ Always use this exact scoring. Same resume → same score.
     "Phone No.": "",
     "Email": "",
     "LinkedIn": "",
-    "GitHub":"";
+    "GitHub":""
     "Address": ""
   },
   "Skills": [],
   "Experience": [
         "Title":"",
         "Company":"",
-        "Description":"";
+        "Description":""
         "Dates":"";
     ],
   "Education": [

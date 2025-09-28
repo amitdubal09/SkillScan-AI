@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 🔹 Call AI analysis function
         const aiResult = await window.analyzeResume(uploadedFile);
         console.log(aiResult);
-        
+
         const contactinfo = aiResult.ContactInformation || {};
         const atsScore = aiResult.ATSScore?.Total || 0;
         const experiences = aiResult.Experience || [];
@@ -129,38 +129,38 @@ document.addEventListener("DOMContentLoaded", () => {
         const FormatImprovements = aiResult.FormatImprovements || [];
         const suggestionbtn = aiResult.Keywordstoadd || [];
 
-        // if (aiResult.length > 0) {
+        if (aiResult.length > 0) {
 
 
-        //     // Extract values
-        //     const dataToSend = {
-        //         name: contactinfo.Name || "Name not found",
-        //         contactinfo: contactinfo["Phone No."],
-        //         skills: aiResult.Skills || aiResult.skills || [],
-        //         projects: aiResult.Projects || [],
-        //         education: aiResult.Education || [],
-        //         experience: aiResult.Experience || [],
-        //         atsscore: aiResult.ATSScore?.Total || 0,
-        //         FormatImprovements: aiResult.FormatImprovements || [],
-        //         suggestionbtn: aiResult.Keywordstoadd || []
-        //     };
+            // Extract values
+            const dataToSend = {
+                name: contactinfo.Name || "Name not found",
+                contactinfo: contactinfo["Phone No."],
+                skills: aiResult.Skills || aiResult.skills || [],
+                projects: aiResult.Projects || [],
+                education: aiResult.Education || [],
+                experience: aiResult.Experience || [],
+                atsscore: aiResult.ATSScore?.Total || 0,
+                FormatImprovements: aiResult.FormatImprovements || [],
+                suggestionbtn: aiResult.Keywordstoadd || []
+            };
 
-        //     console.log("dataToSend", dataToSend);
-        //     // Send JSON to PHP
-        //     fetch("extract-info.php", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json" // tell PHP it's JSON
-        //         },
-        //         body: JSON.stringify(dataToSend) // convert JS object → JSON string
-        //     })
-        //         .then(response => response.text())
-        //         .then(data => {
-        //             console.log("PHP Response:", data);
-        //         })
-        //         .catch(error => console.error("Error:", error));
+            console.log("dataToSend", dataToSend);
+            // Send JSON to PHP
+            fetch("extract-info.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json" // tell PHP it's JSON
+                },
+                body: JSON.stringify(dataToSend) // convert JS object → JSON string
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log("PHP Response:", data);
+                })
+                .catch(error => console.error("Error:", error));
 
-        // }
+        }
 
         // Contact Info
         username.textContent = contactinfo.Name || "Name not found";
