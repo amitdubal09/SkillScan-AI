@@ -29,7 +29,7 @@ if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)) {
                             <input class="moving-input" type="password" name="password" placeholder="Password" required />
                             <div class="checkbox">
                                 <input type="checkbox" id="signupCheck" />
-                                <label for="signupCheck">I accept all terms & conditions</label>
+                                <label for="signupCheck"><a href="privacy&policy.html">I accept all terms & conditions</a></label>
                             </div>
                             <input class="submit" name="register" type="submit" value="Signup" />
                             <p class="toggle">Already have an account?
@@ -45,7 +45,7 @@ if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)) {
                             <input class="moving-input" type="text" name="email_username"
                                 placeholder="Username / Email address" required />
                             <input class="moving-input" type="password" name="password" placeholder="Password" required />
-                            <a href="#">Forgot password?</a>
+                            <a href="for_pass.php">Forgot password?</a>
                             <input class="submit" type="submit" name="login" value="Login" />
                             <p class="toggle">Don’t have an account?
                                 <a href="#" class="to-signup">Signup</a>
