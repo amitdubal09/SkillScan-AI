@@ -1,5 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* =====================
+   Glassmorphism Neon Theme
+===================== */
+:root {
+    --primary: #00f7ff;
+    /* Neon Cyan */
+    --secondary: #ff3c7d;
+    /* Neon Pink */
+    --bg-dark: #0a0a0a;
+    --glass: rgba(255, 255, 255, 0.05);
+    --text: #e5e5e5;
+    --text-dim: #9ca3af;
+    --radius: 15px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
 
+/* ---------- RESET ---------- */
 * {
     margin: 0;
     padding: 0;
@@ -8,11 +23,155 @@
 
 body {
     font-family: "Poppins", sans-serif;
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
+    color: var(--text);
+    background: var(--bg-dark);
     font-size: clamp(14px, 1.6vw, 16px);
     line-height: 1.6;
 }
+
+.loading {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    /* fixed overlay */
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    z-index: 9999;
+    /* on top of everything */
+    display: none;
+    /* hidden by default */
+    justify-content: center;
+    /* horizontal center */
+    align-items: center;
+    /* vertical center */
+}
+
+/* Loader container */
+.loader-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    font-family: "Inter", sans-serif;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: white;
+    border-radius: 50%;
+    background-color: transparent;
+    user-select: none;
+}
+
+/* Spinning loader effect */
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: transparent;
+    animation: loader-rotate 2s linear infinite;
+    z-index: 0;
+}
+
+@keyframes loader-rotate {
+    0% {
+        transform: rotate(90deg);
+        box-shadow:
+            0 10px 20px 0 #fff inset,
+            0 20px 30px 0 #ad5fff inset,
+            0 60px 60px 0 #471eec inset;
+    }
+
+    50% {
+        transform: rotate(270deg);
+        box-shadow:
+            0 10px 20px 0 #fff inset,
+            0 20px 10px 0 #d60a47 inset,
+            0 40px 60px 0 #311e80 inset;
+    }
+
+    100% {
+        transform: rotate(450deg);
+        box-shadow:
+            0 10px 20px 0 #fff inset,
+            0 20px 30px 0 #ad5fff inset,
+            0 60px 60px 0 #471eec inset;
+    }
+}
+
+.loader-letter {
+    display: inline-block;
+    opacity: 0.4;
+    transform: translateY(0);
+    animation: loader-letter-anim 2s infinite;
+    z-index: 1;
+    border-radius: 50ch;
+    border: none;
+}
+
+.loader-letter:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader-letter:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.loader-letter:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.loader-letter:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.loader-letter:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.loader-letter:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.loader-letter:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.loader-letter:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+.loader-letter:nth-child(9) {
+    animation-delay: 0.8s;
+}
+
+.loader-letter:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
+@keyframes loader-letter-anim {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    40% {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+}
+
 
 /* ---------- NAVBAR ---------- */
 .nav {
@@ -20,51 +179,53 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    border: 1px solid black;
-    background-color: rgb(255, 255, 255);
+    background: var(--glass);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
     flex-wrap: wrap;
 }
 
 .logo {
     font-weight: bold;
     font-size: clamp(18px, 2vw, 23px);
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--primary);
 }
 
 .logo a {
-    color: black;
+    color: var(--primary);
     text-decoration: none;
 }
 
 .user {
-    background-color: rgb(255, 255, 255);
-    color: black;
-    outline: none;
+    background: var(--secondary);
+    color: #fff;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 15px;
-    transition: .5s ease;
+    border-radius: var(--radius);
+    transition: .4s ease;
+    box-shadow: 0 0 8px var(--secondary);
 }
 
 .user a {
-    color: black;
+    color: #fff;
     margin-left: 10px;
     text-decoration: none;
     padding: 5px;
-    border: 1px solid black;
-    outline: none;
     border-radius: 10px;
-}
-
-.user:hover a {
-    background-color: black;
-    color: rgb(255, 255, 255);
+    border: 1px solid transparent;
+    transition: .3s ease;
 }
 
 .user:hover {
-    box-shadow: 3px 13px 10px rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
-    user-select: none;
-    border: 1px solid black;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.user:hover a {
+    background: var(--glass);
+    color: black;
 }
 
 .nav-list>ul {
@@ -81,39 +242,46 @@ body {
 
 .combine {
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 30px;
 }
 
 .dashboard li {
     list-style: none;
-    border: 1px solid black;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 5px 10px;
 }
 
 .dashboard li a {
     text-decoration: none;
-    color: black;
+    color: var(--text);
+    transition: .3s ease;
 }
 
-.dashboard:hover a {
-    color: white;
+.dashboard li:hover a {
+    color: var(--secondary);
+    text-shadow: 0 0 8px var(--secondary);
 }
 
 .login-btn {
     cursor: pointer;
     font-weight: 500;
-    outline: none;
-    border: 1px solid rgb(82, 82, 82);
+    border: 1px solid var(--text-dim);
     padding: 0.5rem 1rem;
-    color: black;
-    border-radius: 15px;
+    color: var(--text);
+    border-radius: var(--radius);
     font-size: clamp(15px, 1.5vw, 15px);
-    transition: 0.5s ease;
+    transition: .3s ease;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
 }
 
 .login-btn:hover {
-    background-color: #000000;
-    color: white;
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 10px var(--primary);
 }
 
 /* ---------- MAIN CONTAINER ---------- */
@@ -123,37 +291,47 @@ main {
 }
 
 .preview {
-    background-color: black;
+    background: var(--glass);
+    display: none;
+    width: 50%;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
 }
 
+/* ---------- CONTENT ---------- */
 .container {
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 1rem;
-    color: black;
-    overflow: hidden;
+    color: var(--text);
     flex-direction: column;
 }
 
 .head {
     text-align: center;
-    color: black;
+    color: var(--primary);
     margin-top: 15px;
-    font-size: clamp(15px, 2vw, 10px);
+    font-size: clamp(15px, 2vw, 18px);
+    text-shadow: 0 0 10px var(--primary);
 }
 
 /* ---------- UPLOAD SECTION ---------- */
 .upload-container {
     padding: 1rem;
     text-align: center;
-    width: 50%;
-    margin-left: 25%;
-    border: 2px dashed #000000;
-    border-radius: 10px;
-    background-color: #ffffff;
+    width: 40%;
+    margin-left: 30%;
+    border: 2px dashed var(--primary);
+    border-radius: var(--radius);
+    background: var(--glass);
     cursor: pointer;
     font-size: clamp(13px, 1.5vw, 15px);
+    transition: .3s ease;
+    box-shadow: var(--shadow);
+}
+
+.upload-container:hover {
+    box-shadow: 0 0 12px var(--primary);
 }
 
 .file-input {
@@ -163,78 +341,33 @@ main {
 .browse {
     text-decoration: underline;
     cursor: pointer;
+    color: var(--primary);
 }
 
 .file-name {
     font-size: clamp(12px, 1.2vw, 14px);
-}
-
-/* loader */
-.loader-wrapper {
-    position: fixed;
-    /* Fullscreen overlay */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.9);
-    /* optional white overlay */
-    z-index: 9999;
-}
-
-.loader {
-    --base-color: #000000;
-    position: relative;
-    /* 👈 now pseudo elements will align correctly */
-    width: 60px;
-    height: 60px;
-}
-
-.loader::before {
-    content: '';
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: #f5f85937;
-    background-image: radial-gradient(circle 8px at 18px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 0px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 0px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 36px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 36px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 30px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 30px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 5px, var(--base-color) 100%, transparent 0);
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    animation: rotationBack 3s linear infinite;
-}
-
-@keyframes rotationBack {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(-360deg);
-    }
+    color: var(--text-dim);
 }
 
 /* ---------- BUTTONS ---------- */
 #start-analysis {
     display: block;
-    margin-left: 18px;
-    margin: 0px auto;
-    margin-top: 20px;
+    margin: 20px auto 0;
     padding: 0.7rem 1.2rem;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    background: var(--glass);
     font-size: clamp(13px, 1.5vw, 15px);
     font-weight: bold;
     cursor: pointer;
-    transition: .4s ease;
+    transition: .3s ease;
+    color: var(--primary);
 }
 
 #start-analysis:hover {
-    color: white;
-    background-color: rgb(0, 0, 0);
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 10px var(--primary);
 }
 
 /* ---------- MAIN RESULT SECTION ---------- */
@@ -245,8 +378,7 @@ main {
 }
 
 .atsmeter {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
 }
@@ -260,10 +392,9 @@ main {
     justify-content: center;
     font-size: 22px;
     font-weight: bold;
-    background: conic-gradient(#ddd 0deg 360deg);
-    /* default empty */
+    background: conic-gradient(var(--secondary) 0deg 0deg, #222 0deg 360deg);
     position: relative;
-    transition: 0.5s ease;
+    transition: .5s ease;
 }
 
 .circle::before {
@@ -271,26 +402,17 @@ main {
     position: absolute;
     width: 120px;
     height: 120px;
-    background: #fff;
+    background: var(--bg-dark);
     border-radius: 50%;
 }
 
 .circle span {
     position: relative;
     z-index: 1;
+    color: var(--text);
 }
 
-/* (Your .container text styles were accidentally nested inside .circle span) */
-.container p,
-.container h2,
-.container h3,
-.container h4 {
-    margin: 0.5rem 0 1rem;
-    font-size: clamp(13px, 1.6vw, 16px);
-}
-
-
-/* Common box style */
+/* ---------- BOXES ---------- */
 .username,
 .atsscore,
 .projects,
@@ -299,61 +421,64 @@ main {
 #experience {
     margin-top: 0.3rem;
     padding: 0.8rem;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid var(--glass);
+    border-radius: var(--radius);
+    background: var(--glass);
+    box-shadow: var(--shadow);
 }
 
 .contactinfo a {
+    color: var(--primary);
     text-decoration: underline;
 }
 
+/* ---------- SKILLS ---------- */
 #SkillsExtracted {
     display: flex;
-    border: 1px solid black;
     flex-wrap: wrap;
     padding: 0.5rem;
-    font-size: clamp(12px, 1.5vw, 15px);
-    border-radius: 10px;
+    border: 1px solid var(--glass);
+    border-radius: var(--radius);
+    background: var(--glass);
 }
 
-/* preview */
-.preview {
-    flex: 1;
-    background-color: #fff;
-    display: none;
-    border-left: 2px solid #ccc;
+.skill-badge {
+    display: flex;
+    width: fit-content;
+    margin: 0.5rem;
+    border: 1px solid var(--primary);
+    padding: 0.5rem 1rem;
+    font-size: clamp(12px, 1.5vw, 14px);
+    border-radius: 20px;
+    color: var(--text);
+    box-shadow: 0 0 6px var(--primary);
 }
-
-.preview iframe {
-    width: 100%;
-    height: auto;
-    min-height: 100vh;
-    border: none;
-}
-
 
 /* ---------- RECOMMENDATIONS ---------- */
-
-
 .recommendation {
     margin: 1rem auto;
     padding: 1rem 2rem;
-    border-radius: 20px;
-    border: 1px solid black;
+    border-radius: var(--radius);
+    border: 1px solid var(--glass);
+    background: var(--glass);
+    box-shadow: var(--shadow);
 }
 
 .suggestions-btn {
     padding: 0.5rem 1rem;
     margin: 0.5rem;
     border-radius: 20px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid var(--primary);
     font-size: clamp(12px, 1.5vw, 15px);
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: .3s ease;
+    background: var(--glass);
+    color: var(--text);
 }
 
 .suggestions-btn:hover {
-    box-shadow: 0px 10px 10px rgb(0, 0, 0);
+    box-shadow: 0 0 12px var(--secondary);
+    color: var(--text);
 }
 
 .suggestion {
@@ -361,22 +486,25 @@ main {
     padding: 1rem;
     line-height: 1.4;
     border-radius: 10px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid var(--glass);
     font-size: clamp(13px, 1.5vw, 15px);
+    background: var(--glass);
     transition: .3s ease;
 }
 
 .suggestion:hover {
     transform: translateX(-5px);
+    color: var(--primary);
+    border-color: var(--secondary);
 }
 
-/* Format + keyword boxes */
+/* ---------- KEYWORDS ---------- */
 .formattoimprove,
 .keywordstosuggest {
     display: none;
     margin-top: 1.5rem;
     padding: 1rem;
-    border-top: 1px solid black;
+    border-top: 1px solid var(--glass);
 }
 
 .keywordstosuggest {
@@ -385,50 +513,42 @@ main {
 }
 
 .keyword-btn {
-    border: 1px solid black;
+    border: 1px solid var(--primary);
     margin: 0.3rem;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    color: black;
-    width: fit-content;
+    color: var(--text);
+    background: var(--glass);
     font-size: clamp(12px, 1.5vw, 14px);
 }
 
-/* ---------- SKILL BADGES ---------- */
-.skill-badge {
-    display: flex;
-    width: fit-content;
-    margin: 0.5rem;
-    border: 1px solid black;
-    padding: 0.5rem 1rem;
-    font-size: clamp(12px, 1.5vw, 14px);
-    border-radius: 20px;
-}
-
+/* ---------- TEST BUTTON ---------- */
 .test-btn {
     display: none;
     cursor: pointer;
     padding: 10px 15px;
-    background-color: white;
-    transition: .5s ease;
+    background: var(--glass);
     font-weight: bold;
-    border-radius: 10px;
-    border: 1px solid black;
+    border-radius: var(--radius);
+    border: 1px solid var(--primary);
+    transition: .3s ease;
+    color: var(--primary);
 }
 
 .test-btn a {
-    color: black;
+    color: var(--primary);
     text-decoration: none;
 }
 
 .test-btn:hover {
-    background-color: black;
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .test-btn:hover a {
-    color: white;
+    color: #000;
 }
-
 
 /* ---------- RESPONSIVE ---------- */
 @media screen and (max-width: 768px) {

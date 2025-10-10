@@ -37,8 +37,25 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     </head>
 
     <body>
-        <div class="loader-wrapper">
-            <span class="loader"></span>
+        <div class="loading" id="loading-overlay">
+            <div class="loader-wrapper">
+                <div class="loader"></div>
+                <div class="loader-letters">
+                    <span class="loader-letter">L</span>
+                    <span class="loader-letter">o</span>
+                    <span class="loader-letter">a</span>
+                    <span class="loader-letter">d</span>
+                    <span class="loader-letter">i</span>
+                    <span class="loader-letter">n</span>
+                    <span class="loader-letter">g</span>
+                    <span class="loader-letter">.</span>
+                    <span class="loader-letter">.</span>
+                    <span class="loader-letter">.</span>
+                </div>
+            </div>
+        </div>
+
+
         </div>
         <header>
             <div class="nav">

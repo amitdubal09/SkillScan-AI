@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let mainSection = document.getElementById("main");
     let previewBox = document.querySelector(".preview");
     let container = document.querySelector(".container");
-    let loader = document.querySelector(".loader-wrapper");
+    let loader = document.querySelector(".loading");
     let testbtn = document.querySelector(".test-btn");
 
     // ATS Elements
@@ -173,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
         // ATS Score
+        loader.style.display = "none";
         useratsscore.textContent = `${atsScore}%`;
         atsValue.textContent = `${atsScore}%`;
         updateATSCircle(atsScore);
@@ -198,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.classList.add("suggestion");
                 div.textContent = para;
                 formattoimprove.appendChild(div);
-                loader.style.display = "none";
             });
         } else {
             formattoimprove.textContent = "No format improvements suggested.";
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
     suggestionbtns.forEach(btn => {
         btn.addEventListener("click", function () {
             suggestionbtns.forEach(b => (b.style = "")); // reset all
-            btn.style.color = "black";
+            btn.style.color = "white";
             btn.style.border = "1px solid black";
         });
     });

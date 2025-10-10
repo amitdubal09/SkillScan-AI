@@ -1,8 +1,6 @@
-const API_KEY = "AIzaSyAilJiss4NNdQdCyOLU_TZmafZyfimz4i8"; // Apna API key
+const API_KEY = "AIzaSyAilJiss4NNdQdCyOLU_TZmafZyfimz4i8"; 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
-
 /**
- * File ko Base64 me convert karta hai
  * @param {File} file 
  * @returns {Promise<string>}
  */
@@ -14,15 +12,12 @@ function fileToBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-
 window.analyzeResume = async function (file) {
   try {
     const base64Data = await fileToBase64(file);
-
     // 🔒 Strict rules for ATS Score (deterministic)
     const prompt = `
 You are a strict resume analyzer. From this resume, extract the following information and return it ONLY in valid JSON format (no extra text, no explanations).
-
 ATS SCORE RULES (always deterministic, no randomness):
 - Skills Match (40 points): 
    > 80% relevant skills present = 40
@@ -42,9 +37,7 @@ ATS SCORE RULES (always deterministic, no randomness):
    Minor issues = 10
    Major issues = 5
    Poor = 0
-
 Always use this exact scoring. Same resume → same score.
-
 {
   "ContactInformation": {
     "Name": "",
@@ -95,7 +88,7 @@ Always use this exact scoring. Same resume → same score.
       "KeywordMatch": 5
     }
   },
-  "Experience_Projects": {
+  "Experience": {
     "Total": 30,
     "Breakdown": {
       "WorkExperience": 10,
@@ -135,13 +128,11 @@ Always use this exact scoring. Same resume → same score.
     }
   }
 }
-
   },
   "Keywordstoadd": [],
   "FormatImprovements": []
 }
         `;
-
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -167,12 +158,10 @@ Always use this exact scoring. Same resume → same score.
         }
       })
     });
-
     // ✅ Get JSON response
     const data = await response.json();
     const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
     console.log("Raw AI text:", rawText);
-
     // ✅ Extract clean JSON
     let result = {};
     try {
@@ -185,7 +174,6 @@ Always use this exact scoring. Same resume → same score.
     } catch (err) {
       console.error("Error parsing JSON:", err, "Raw text:", rawText);
     }
-
     // ✅ Only send if result has meaningful data
     if (result && Object.keys(result).length > 0 && result.ContactInformation) {
       const contactinfo = result.ContactInformation || {};
@@ -218,10 +206,7 @@ Always use this exact scoring. Same resume → same score.
     } else {
       console.warn("⚠️ No valid AI result found, skipping DB insert.");
     }
-
-
     return result;
-
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     return {};
@@ -229,7 +214,6 @@ Always use this exact scoring. Same resume → same score.
 };
 
 // test generrator api
-
 window.MakeMockTest = async function (skills) {
   try {
     const prompt = `
@@ -246,7 +230,6 @@ Rules:
 - Each question must have 4 options (A, B, C, D).  
 - Only one option should be correct.  
 - Return the result strictly in valid JSON format with the following structure:
-
 [
   {
     "question": "Your question text here?",
@@ -254,10 +237,8 @@ Rules:
     "answer": "Correct Option"
   }
 ]
-
 Do not add explanations or extra text. Only return the JSON.
        `
-
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -277,14 +258,12 @@ Do not add explanations or extra text. Only return the JSON.
         }
       })
     });
-
     // ✅ Get JSON response
     const data = await response.json();
     console.log("Test Data : ")
     //console.log(data)
     const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
     console.log("Raw Mock text:", rawText);
-
     // ✅ Extract clean JSON
     let result = {};
     try {
@@ -300,7 +279,6 @@ Do not add explanations or extra text. Only return the JSON.
       console.error("Error parsing JSON:", err, "Raw text:", rawText);
     }
     return result;
-
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     return {};
