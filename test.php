@@ -69,6 +69,12 @@ if ($result && mysqli_num_rows($result) > 0) {
     <p>© 2025 SkillScan | Built to help you land your dream job</p>
   </footer>
 
+  <div class="chatbot-icon">
+    <a href="assistant/home.php">
+      <img src="img/robot-assistant.png" alt="">
+    </a>
+  </div>
+
   <script src="javascript/api.js"></script>
   <script>
     let footer = document.querySelector(".footer");

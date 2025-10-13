@@ -119,9 +119,13 @@ session_start();
         <p><a href="privacy&policy.html">Privacy Policy</a></p>
     </footer>
 
+    <div class="chatbot-icon">
+        <a href="assistant/home.php">
+            <img src="img/robot-assistant.png" alt="">
+        </a>
+    </div>
 
     <!-- JS Scripts -->
-    <script src="./javascript/index.js" defer></script>
     <script src="./javascript/api.js" defer></script>
     <script src="./javascript/script.js" defer></script>
 

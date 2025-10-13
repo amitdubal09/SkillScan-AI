@@ -155,6 +155,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
         }
         ?>
 
+        <div class="chatbot-icon">
+            <a href="assistant/home.php">
+                <img src="img/robot-assistant.png" alt="">
+            </a>
+        </div>
+
         <script src="./javascript/api.js"></script>
         <script src="./javascript/script.js"></script>
 

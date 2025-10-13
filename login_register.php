@@ -16,13 +16,6 @@ if (isset($_POST['register'])) {
         exit;
     }
 
-    // Email validation (regex, case-insensitive)
-    if (!preg_match("/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i", $email)) {
-        echo "<script>alert('Invalid email format. Please use a valid email address.'); window.location.href='auth.php';</script>";
-        exit;
-    }
-
-
     // Check if username OR email already exists
     $user_exists_query = "
         SELECT * FROM `registered_users` 

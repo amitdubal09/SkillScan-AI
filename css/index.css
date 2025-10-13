@@ -269,6 +269,32 @@ header {
     text-shadow: 0 0 8px var(--primary);
 }
 
+/* Chatbot Icon Fixed at Bottom-Right */
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.chatbot-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: var(--secondary);
+}
+
+/* Hover effect */
+.chatbot-icon:hover {
+    transform: scale(1.1);
+}
+
 /* =====================
    Responsive
 ===================== */

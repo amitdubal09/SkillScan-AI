@@ -24,9 +24,9 @@ if (!(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true)) {
                     <div class="form signup active">
                         <header>Signup</header>
                         <form method="POST" action="login_register.php">
-                            <input class="moving-input" type="text" name="username" placeholder="Username" required />
-                            <input class="moving-input" type="text" name="email" placeholder="Email address" required />
-                            <input class="moving-input" type="password" name="password" placeholder="Password" required />
+                            <input class="moving-input" id="username" type="text" name="username" placeholder="Username" required />
+                            <input class="moving-input" id="email" type="text" name="email" placeholder="Email address" required />
+                            <input class="moving-input" id="password" type="password" name="password" placeholder="Password" required />
                             <div class="checkbox">
                                 <input type="checkbox" id="signupCheck" />
                                 <label for="signupCheck"><a href="privacy&policy.html">I accept all terms & conditions</a></label>
