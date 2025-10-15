@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 /* ---------- GENERAL ---------- */
 body {
     font-family: 'Poppins', sans-serif;
@@ -52,6 +53,7 @@ body {
 
 .sidebar ul.menu li a {
     color: #fff;
+    text-decoration: none;
     display: block;
     padding: 8px 12px;
     border-radius: 10px;

@@ -47,7 +47,7 @@ session_start();
     <section class="hero">
         <div class="intro">
             <h1>Welcome to SkillScan</h1>
-            <p>Your personal resume analyzer that extracts key details, evaluates ATS score, and gives you smart
+            <p>Your personal resume analyzer that extracts key<br> details, evaluates ATS score, and gives you<br> smart
                 recommendations to improve your resume.</p>
 
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
@@ -119,15 +119,33 @@ session_start();
         <p><a href="privacy&policy.html">Privacy Policy</a></p>
     </footer>
 
-    <div class="chatbot-icon">
-        <a href="assistant/home.php">
-            <img src="img/robot-assistant.png" alt="">
-        </a>
+    <!-- Chatbot Icon -->
+    <div class="chatbot-icon" id="chatbotIcon">
+        <img src="img/robot-assistant.png" alt="Chatbot Icon">
     </div>
 
+    <!-- Chat Popup -->
+    <div class="chatbot-popup" id="chatbotPopup">
+        <div class="chat-header">
+            <span>SkillScan Assistant</span>
+            <button id="closeChat"><img src="img/wrong.png" alt=""></button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="bot-msg">👋 Hi! I'm SkillScan AI. How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button id="sendBtn">➤</button>
+        </div>
+    </div>
+
+
     <!-- JS Scripts -->
+
+    <script src="./javascript/index.js"></script>
     <script src="./javascript/api.js" defer></script>
     <script src="./javascript/script.js" defer></script>
+
 
 </body>
 

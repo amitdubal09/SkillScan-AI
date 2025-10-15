@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- REGISTRATION VALIDATION ---
     const signupForm = signupDiv.querySelector("form");
 
-    // --- Regex Patterns ---
+    // --- Regex Patterns for validation ---
     const usernameRe = /^[A-Za-z0-9_]{3,20}$/;
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRe = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     const passwordRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/;
 
     // --- Helper functions ---

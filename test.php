@@ -69,14 +69,91 @@ if ($result && mysqli_num_rows($result) > 0) {
     <p>© 2025 SkillScan | Built to help you land your dream job</p>
   </footer>
 
-  <div class="chatbot-icon">
-    <a href="assistant/home.php">
-      <img src="img/robot-assistant.png" alt="">
-    </a>
+  <!-- Chatbot Icon -->
+  <div class="chatbot-icon" id="chatbotIcon">
+    <img src="img/robot-assistant.png" alt="Chatbot Icon">
+  </div>
+
+  <!-- Chat Popup -->
+  <div class="chatbot-popup" id="chatbotPopup">
+    <div class="chat-header">
+      <span>SkillScan Assistant</span>
+      <button id="closeChat"><img src="img/wrong.png" alt=""></button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="bot-msg">👋 Hi! I'm SkillScan AI. How can I help you today?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type a message..." />
+      <button id="sendBtn">➤</button>
+    </div>
   </div>
 
   <script src="javascript/api.js"></script>
   <script>
+    const chatbotIcon = document.getElementById("chatbotIcon");
+    const chatbotPopup = document.getElementById("chatbotPopup");
+    const closeChat = document.getElementById("closeChat");
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatBody = document.getElementById("chatBody");
+
+    // Toggle Chat (open/close)
+    chatbotIcon.addEventListener("click", () => {
+      if (chatbotPopup.style.display === "flex") {
+        chatbotPopup.style.display = "none";
+      } else {
+        chatbotPopup.style.display = "flex";
+      }
+    });
+
+
+    // Close Chat
+    closeChat.addEventListener("click", () => {
+      chatbotPopup.style.display = "none";
+    });
+
+    // Send Message
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      const userMsg = document.createElement("div");
+      userMsg.classList.add("user-msg");
+      userMsg.textContent = text;
+      chatBody.appendChild(userMsg);
+      userInput.value = "";
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      // Simulate bot reply (you can connect this to your PHP or Gemini AI API)
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.classList.add("bot-msg");
+        botMsg.textContent = "🤖 Thinking...";
+        chatBody.appendChild(botMsg);
+
+        fetch("api.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        })
+          .then(res => res.json())
+          .then(data => {
+            botMsg.textContent = data.reply || "⚠️ No response from AI.";
+            chatBody.scrollTop = chatBody.scrollHeight;
+          })
+          .catch(err => {
+            botMsg.textContent = "❌ Error connecting to AI.";
+            console.error(err);
+          });
+      }, 500);
+    }
     let footer = document.querySelector(".footer");
     let mockdata = [];
 

@@ -59,71 +59,160 @@ function printJsonAsList($json)
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">
-            <a href="index.php">SkillScan</a>
-        </div>
-        <ul class="menu">
-            <li><a href="dashboard.php" class="active">🏠 Dashboard</a></li>
-            <li><a href="resumeanalysis.php">📄 Resume Analysis</a></li>
-            <li><a href="test.php">📝 Take Test</a></li>
-            <li><a href="report.php">📊 Reports</a></li>
-        </ul>
-        <div class="logout">
-            <a href="logout.php">🚪 Logout</a>
-        </div>
-    </aside>
+    <div class="for-adjust">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="index.php">SkillScan</a>
+            </div>
+            <ul class="menu">
+                <li><a href="dashboard.php" class="active">Dashboard</a></li>
+                <li><a href="resumeanalysis.php">Resume Analysis</a></li>
+                <li><a href="test.php">Take Test</a></li>
+                <li><a href="report.php"> Reports</a></li>
+            </ul>
+            <div class="logout">
+                <a href="logout.php">Logout</a>
+            </div>
+        </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <header class="topbar">
-            <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?> 🎉</h2>
-        </header>
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?> 🎉</h2>
+            </header>
 
-        <div class="cards">
-            <div class="card">
-                <h3>Skills</h3>
-                <p>
-                    <?php
-                    $skillsArr = json_decode($skills, true);
-                    if (is_array($skillsArr)) {
-                        foreach ($skillsArr as $skill) {
-                            echo '<span class="skill-badge">' . htmlspecialchars($skill) . '</span> ';
+            <div class="cards">
+                <div class="card">
+                    <h3>Skills</h3>
+                    <p>
+                        <?php
+                        $skillsArr = json_decode($skills, true);
+                        if (is_array($skillsArr)) {
+                            foreach ($skillsArr as $skill) {
+                                echo '<span class="skill-badge">' . htmlspecialchars($skill) . '</span> ';
+                            }
+                        } else {
+                            echo htmlspecialchars($skills);
                         }
-                    } else {
-                        echo htmlspecialchars($skills);
-                    }
-                    ?>
-                </p>
-            </div>
+                        ?>
+                    </p>
+                </div>
 
-            <div class="card">
-                <h3>Experience</h3>
-                <?php echo printJsonAsList($experience); ?>
-            </div>
+                <div class="card">
+                    <h3>Experience</h3>
+                    <?php echo printJsonAsList($experience); ?>
+                </div>
 
-            <div class="card">
-                <h3>Education</h3>
-                <?php echo printJsonAsList($education); ?>
-            </div>
+                <div class="card">
+                    <h3>Education</h3>
+                    <?php echo printJsonAsList($education); ?>
+                </div>
 
-            <div class="card">
-                <h3>Projects</h3>
-                <?php echo printJsonAsList($projects); ?>
-            </div>
+                <div class="card">
+                    <h3>Projects</h3>
+                    <?php echo printJsonAsList($projects); ?>
+                </div>
 
-            <div class="card">
-                <h3>Contact Info</h3>
-                <p><?php echo printJsonAsList($contactinfo); ?></p>
-            </div>
+                <div class="card">
+                    <h3>Contact Info</h3>
+                    <p><?php echo printJsonAsList($contactinfo); ?></p>
+                </div>
 
-            <div class="card highlight">
-                <h3>ATS Score</h3>
-                <p><?php echo htmlspecialchars($ats); ?>%</p>
+                <div class="card highlight">
+                    <h3>ATS Score</h3>
+                    <p><?php echo htmlspecialchars($ats); ?>%</p>
+                </div>
             </div>
+        </main>
+    </div>
+
+    <!-- Chatbot Icon -->
+    <div class="chatbot-icon" id="chatbotIcon">
+        <img src="img/robot-assistant.png" alt="Chatbot Icon">
+    </div>
+
+    <!-- Chat Popup -->
+    <div class="chatbot-popup" id="chatbotPopup">
+        <div class="chat-header">
+            <span>SkillScan Assistant</span>
+            <button id="closeChat"><img src="img/wrong.png" alt=""></button>
         </div>
-    </main>
+        <div class="chat-body" id="chatBody">
+            <div class="bot-msg">👋 Hi! I'm SkillScan AI. How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button id="sendBtn">➤</button>
+        </div>
+    </div>
+
+    <script src="./javascript/dashboard.js"></script>
+    <script>
+        const chatbotIcon = document.getElementById("chatbotIcon");
+        const chatbotPopup = document.getElementById("chatbotPopup");
+        const closeChat = document.getElementById("closeChat");
+        const sendBtn = document.getElementById("sendBtn");
+        const userInput = document.getElementById("userInput");
+        const chatBody = document.getElementById("chatBody");
+
+        // Toggle Chat (open/close)
+        chatbotIcon.addEventListener("click", () => {
+            if (chatbotPopup.style.display === "flex") {
+                chatbotPopup.style.display = "none";
+            } else {
+                chatbotPopup.style.display = "flex";
+            }
+        });
+
+
+        // Close Chat
+        closeChat.addEventListener("click", () => {
+            chatbotPopup.style.display = "none";
+        });
+
+        // Send Message
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", e => {
+            if (e.key === "Enter") sendMessage();
+        });
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            const userMsg = document.createElement("div");
+            userMsg.classList.add("user-msg");
+            userMsg.textContent = text;
+            chatBody.appendChild(userMsg);
+            userInput.value = "";
+
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Simulate bot reply (you can connect this to your PHP or Gemini AI API)
+            setTimeout(() => {
+                const botMsg = document.createElement("div");
+                botMsg.classList.add("bot-msg");
+                botMsg.textContent = "🤖 Thinking...";
+                chatBody.appendChild(botMsg);
+
+                fetch("api.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        botMsg.textContent = data.reply || "⚠️ No response from AI.";
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    })
+                    .catch(err => {
+                        botMsg.textContent = "❌ Error connecting to AI.";
+                        console.error(err);
+                    });
+            }, 500);
+        }
+    </script>
 </body>
 
 </html>
