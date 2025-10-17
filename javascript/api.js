@@ -92,8 +92,7 @@ Always use this exact scoring. Same resume → same score.
     "Total": 30,
     "Breakdown": {
       "WorkExperience": 10,
-      "Projects": 5,
-      "ActionVerbs": 3,
+      "ActionVerbs": 8,
       "QuantifiedAchievements": 5,
       "ChronologicalOrder": 2,
       "Consistency": 5
@@ -186,7 +185,7 @@ Always use this exact scoring. Same resume → same score.
         projects: result.Projects || [],
         education: result.Education || [],
         experience: result.Experience || [],
-        atsscore: result.ATSScore?.Total || 0,
+        ats: result.ATSScore?.Total || 0,
         FormatImprovements: result.FormatImprovements || [],
         suggestionbtn: result.Keywordstoadd || []
       };

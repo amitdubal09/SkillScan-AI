@@ -19,7 +19,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     $skills = $data['skills'];
     $experience = $data['experience'];
     $education = $data['education'];
-    $projects = $data['project'];
+    $projects = $data['projects'];
     $ats = $data['ats'];
     $contactinfo = $data['contactinfo'];
 }

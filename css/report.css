@@ -71,6 +71,8 @@ body {
 
 /* Logout button */
 .sidebar .logout a {
+    margin-bottom: 50px;
+    text-decoration: none;
     display: block;
     text-align: center;
     padding: 10px;

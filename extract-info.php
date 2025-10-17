@@ -4,52 +4,41 @@ session_start();
 
 // Get raw POST data
 $json = file_get_contents("php://input");
-$data = json_decode($json, true); // true = associative array
+$data = json_decode($json, true);
 
 if (isset($_SESSION['username']) && isset($data['saveResumeData'])) {
-    $username = $_SESSION['username'];
+    $username = mysqli_real_escape_string($conn, $_SESSION['username']);
 
-    // Extract values
-    $name = $data['name'] ?? '';
-    $contactinfo = json_encode($data['contactinfo'] ?? []); 
-    $skills = json_encode($data['skills'] ?? []);
-    $projects = json_encode($data['projects'] ?? []);
-    $education = json_encode($data['education'] ?? []);
-    $experience = json_encode($data['experience'] ?? []);
-    $ats = (int)($data['atsscore'] ?? 0);
+    // Extract and escape values
+    $name = mysqli_real_escape_string($conn, $data['name'] ?? '');
+    $contactinfo = mysqli_real_escape_string($conn, json_encode($data['contactinfo'] ?? []));
+    $skills = mysqli_real_escape_string($conn, json_encode($data['skills'] ?? []));
+    $projects = mysqli_real_escape_string($conn, json_encode($data['projects'] ?? []));
+    $education = mysqli_real_escape_string($conn, json_encode($data['education'] ?? []));
+    $experience = mysqli_real_escape_string($conn, json_encode($data['experience'] ?? []));
+    $atsscore = (int) ($data['ats'] ?? 0);
 
-    // Escape values
-    $name = mysqli_real_escape_string($conn, $name);
-    $contactinfo = mysqli_real_escape_string($conn, $contactinfo);
-    $skills = mysqli_real_escape_string($conn, $skills);
-    $projects = mysqli_real_escape_string($conn, $projects);
-    $education = mysqli_real_escape_string($conn, $education);
-    $experience = mysqli_real_escape_string($conn, $experience);
-    $username = mysqli_real_escape_string($conn, $username);
-
-    // Check if user already exists
+    // Check if user exists
     $query = "SELECT * FROM `extracted_information` WHERE `username` = '$username'";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        // ✅ Update existing record
-        echo "UPDATE";
+        // Update existing record
         $sql = "UPDATE `extracted_information` SET 
             name='$name', 
             skills='$skills', 
-            project='$projects', 
+            projects='$projects', 
             education='$education', 
             experience='$experience', 
-            ats='$ats', 
+            ats='$atsscore', 
             contactinfo='$contactinfo'
             WHERE username='$username'";
     } else {
-        // ✅ Insert new record
-        echo "INSERT";
+        // Insert new record
         $sql = "INSERT INTO `extracted_information` 
-            (name, skills, project, education, experience, ats, contactinfo, username) 
+            (username, name, skills, projects, education, experience, ats, contactinfo) 
             VALUES 
-            ('$name', '$skills', '$projects', '$education', '$experience', '$ats', '$contactinfo', '$username')";
+            ('$username', '$name', '$skills', '$projects', '$education', '$experience', '$ats', '$contactinfo')";
     }
 
     // Run query
