@@ -5,7 +5,7 @@ session_start();
 
 #for registretion
 if (isset($_POST['register'])) {
-    
+
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -132,11 +132,12 @@ if (isset($_POST['login'])) {
         }
     } else {
         echo "
-            <script>
-                alert('❌ Cannot run SELECT query: " . mysqli_error($conn) . "');
-                window.location.href='auth.php';
-            </script>
-        ";
+    <script>
+        alert(" . json_encode("❌ Cannot run SELECT query: " . mysqli_error($conn)) . ");
+        window.location.href='auth.php';
+    </script>
+";
+
     }
 }
 ?>
