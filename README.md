@@ -1,8 +1,8 @@
-SkillScan AI 🚀
+
 SkillScan AI is an intelligent resume analysis and mock interview web application designed to help students and job seekers improve their resumes, increase ATS (Applicant Tracking System) scores, and prepare for interviews based on their actual skills.
 This project focuses on real-world hiring needs, combining resume parsing, skill extraction, ATS scoring, and AI-powered personalized assessments.
-✨ Features
 
+✨ Features
 📄 Resume Upload & Parsing
 Upload resume (PDF/DOC)
 Automatically extract skills, experience, education, and contact details
